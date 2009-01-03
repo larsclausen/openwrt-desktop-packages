@@ -34,7 +34,7 @@ define Package/libobrender
   CATEGORY:=Xorg
   SUBMENU:=lib
   TITLE:=openbox render library
-  DEPENDS:=+glib2 +pango +libXft +libstartup-notification +libXcursor +libxml2
+  DEPENDS:=+glib2 +libxml2
 endef
 
 define Package/libobparser
@@ -42,7 +42,7 @@ define Package/libobparser
   CATEGORY:=Xorg
   SUBMENU:=lib
   TITLE:=openbox parser library
-  DEPENDS:=+glib2 +pango +libXft +libstartup-notification +libXcursor +libxml2
+  DEPENDS:=+glib2 +libobrender +pango +libXft +libXcursor +libxml2
 endef
 
 define Package/openbox
@@ -50,7 +50,7 @@ define Package/openbox
   CATEGORY:=Xorg
   SUBMENU:=app
   TITLE:=openbox windowmanager
-  DEPENDS:=+libobrender +libobparser
+  DEPENDS:=+libobrender +libobparser +libstartup-notification
 endef
 
 define Package/openbox-themes

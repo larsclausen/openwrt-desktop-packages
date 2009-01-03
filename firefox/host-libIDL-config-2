@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+export PATH=/usr/bin
+export PKG_CONFIG_PATH= 
+export PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig
+/usr/bin/libIDL-config-2 $*

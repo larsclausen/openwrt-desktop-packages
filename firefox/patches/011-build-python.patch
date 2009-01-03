@@ -1,0 +1,40 @@
+--- xulrunner-1.9.orig/configure	2008-08-30 20:33:54.000000000 +0200
++++ xulrunner-1.9/configure	2008-08-31 00:14:08.000000000 +0200
+@@ -20338,10 +20338,22 @@
+ if test `echo "$MOZ_EXTENSIONS" | grep -c python` -ne 0; then
+                     MOZ_PYTHON=$PYTHON
+         
+-    MOZ_PYTHON_VER=`$PYTHON -c "import sys;print '%d%d' % sys.version_info[0:2]"`
+-    MOZ_PYTHON_VER_DOTTED=`$PYTHON -c "import sys;print '%d.%d' % sys.version_info[0:2]"`
++    if test "$PYTHON_VERSION"; then
++        MOZ_PYTHON_VER=i`$PYTHON -c "print '$PYTHON_VERSION'.replace('.', '')"`
++    else
++        MOZ_PYTHON_VER=`$PYTHON -c "import sys;print '%d%d' % sys.version_info[0:2]"`
++    fi
++    if test "$PYTHON_VERSION"; then
++        MOZ_PYTHON_VER_DOTTED=`$PYTHON -c "import sys;print '%d.%d' % sys.version_info[0:2]"`
++    else
++        MOZ_PYTHON_VER_DOTTED=$PYTHON_VERSION
++    fi
+     
++    if test "$PYTHON_PREFIX"; then 
++        MOZ_PYTHON_PREFIX=$PYTHON_PREFIX
++    else
+         MOZ_PYTHON_PREFIX=`$PYTHON -c "import sys; print sys.prefix"`
++    fi    
+         if test "$OS_ARCH" = "WINNT"; then
+         MOZ_PYTHON_PREFIX=`$CYGPATH_W $MOZ_PYTHON_PREFIX | $CYGPATH_S`
+                                 MOZ_PYTHON_DLL_SUFFIX=.pyd
+@@ -20361,8 +20373,11 @@
+             { echo "configure: error: The Python at $MOZ_PYTHON_PREFIX looks like a dev tree. The PyXPCOM build cannot handle this yet. You must 'make install' Python and use the installed tree." 1>&2; exit 1; }
+         elif test "$OS_ARCH" = "Darwin"; then
+                                                 MOZ_PYTHON_LIBS="-framework Python"
++        elif test -x "$PYTHON-config"; then
++            MOZ_PYTHON_LIBS=`$PYTHON-config --libs 2> /dev/null`
+         else
+-            { echo "configure: error: Could not find build shared libraries for Python at $MOZ_PYTHON_PREFIX.  This is required for PyXPCOM." 1>&2; exit 1; }
++        
++        { echo "configure: error: Could not find build shared libraries for Python at $MOZ_PYTHON_PREFIX.  This is required for PyXPCOM." 1>&2; exit 1; }
+         fi
+         if test "$OS_ARCH" = "Linux"; then
+             MOZ_PYTHON_LIBS="$MOZ_PYTHON_LIBS -lutil"
