@@ -1,0 +1,11 @@
+--- wxGTK-2.8.9/Makefile.in.orig	2008-09-23 23:35:11.000000000 +0200
++++ wxGTK-2.8.9/Makefile.in	2008-09-23 23:35:35.000000000 +0200
+@@ -12102,7 +12102,7 @@
+ 	$(INSTALL_DIR) $(DESTDIR)$(bindir)
+ 	$(INSTALL_DIR) $(DESTDIR)$(libdir)/wx/config
+ 	$(INSTALL_PROGRAM) lib/wx/config/$(TOOLCHAIN_FULLNAME) $(DESTDIR)$(libdir)/wx/config
+-	(cd $(DESTDIR)$(bindir) && rm -f wx-config && $(LN_S) $(libdir)/wx/config/$(TOOLCHAIN_FULLNAME) wx-config)
++	(cd $(DESTDIR)$(bindir) && rm -f wx-config && $(LN_S) $(DESTDIR)$(libdir)/wx/config/$(TOOLCHAIN_FULLNAME) wx-config)
+ 
+ locale_install: 
+ 	$(INSTALL_DIR) $(DESTDIR)$(datadir)/locale
