@@ -111,4 +111,6 @@ define Package/openbox-themes/install
 		$(1)/usr/share/themes/
 endef
 
+$(eval $(call BuildPackage,libobparser))
+$(eval $(call BuildPackage,libobrender))
 $(eval $(call BuildPackage,openbox))
