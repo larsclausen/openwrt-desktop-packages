@@ -32,7 +32,7 @@ TARGET_LDFLAGS+= \
 define Package/libobrender
   SECTION:=xorg-lib
   CATEGORY:=Xorg
-  SUBMENU:=lib
+  SUBMENU:=libraries
   TITLE:=openbox render library
   DEPENDS:=+glib2 +libxml2
 endef
@@ -40,7 +40,7 @@ endef
 define Package/libobparser
   SECTION:=xorg-lib
   CATEGORY:=Xorg
-  SUBMENU:=lib
+  SUBMENU:=libraries
   TITLE:=openbox parser library
   DEPENDS:=+glib2 +libobrender +pango +libXft +libXcursor +libxml2
 endef
@@ -68,14 +68,14 @@ endef
 define Package/libobrender/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) \
-		$(PKG_INSTALL_DIR)/usr/lib/libobrender.so*
+		$(PKG_INSTALL_DIR)/usr/lib/libobrender.so* \
 		$(1)/usr/lib/
 endef
 
 define Package/libobparser/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) \
-		$(PKG_INSTALL_DIR)/usr/lib/libobparser.so*
+		$(PKG_INSTALL_DIR)/usr/lib/libobparser.so* \
 		$(1)/usr/lib/
 endef
 
@@ -107,10 +107,11 @@ endef
 define Package/openbox-themes/install
 	$(INSTALL_DIR) $(1)/usr/share/themes/
 	$(CP) \
-		$(PKG_INSTALL_DIR)/usr/share/themes/*
+		$(PKG_INSTALL_DIR)/usr/share/themes/* \
 		$(1)/usr/share/themes/
 endef
 
 $(eval $(call BuildPackage,libobparser))
 $(eval $(call BuildPackage,libobrender))
 $(eval $(call BuildPackage,openbox))
+$(eval $(call BuildPackage,openbox-themes))
